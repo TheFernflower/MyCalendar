@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+
+
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css" />
+
+</head>
+    <title>
+        Test
+    </title>
+
+    <body>
+    Hi!
+    <div id="main-container">
+        <div id="task-container">
+            <b>Task list</b>
+            <button id="button">+</button>
+            <div id="tasklist"></div>
+            <p>
+                <input type="checkbox" id="drop-remove" />
+                <label for="drop-remove">remove after drop</label>
+            </p>
+        </div>
+        <b>Event</b>
+        <div id="eventRedactor">
+            <table>
+
+                <tbody>
+                <tr>
+                    <td>Title: </td>
+                    <td id="title" contenteditable="true">Титле</td>
+                </tr>
+                <tr>
+                    <td >Duration(hours): </td>
+                    <td id="duration" contenteditable="true">Дюратион</td>
+                </tr>
+                <tr>
+                    <td >Repeat every (days): </td>
+                    <td contenteditable="true">Репиатабле</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div id='calendar'></div>
+    </div>
+
+    </body>
+
+</html>

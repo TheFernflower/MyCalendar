@@ -1,0 +1,23 @@
+#main-container {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+#task-container {
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+#calendar {
+    grid-column-start: 2;
+    grid-column-end: 2;
+}
+
+.task {
+    margin: 0.25rem 0.5rem 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+}
+
+.fc-event-completed {
+    background: green;
+}
