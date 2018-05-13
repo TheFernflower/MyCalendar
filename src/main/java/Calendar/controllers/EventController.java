@@ -36,7 +36,7 @@ public class EventController {
         eventRepository.deleteById(id);
     }
 
-    @RequestMapping(value = "/events{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/events/{id}", method = RequestMethod.GET)
     public @ResponseBody
     Optional<Event> getEvent(@PathVariable("id") long id) {
         return eventRepository.findById(id);

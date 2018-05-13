@@ -18,9 +18,9 @@
     </title>
 
     <body>
-    Hi!
+
     <div id="main-container">
-        <div id="task-container">
+        <div id="control-panel">
             <b>Task list</b>
             <button id="button">+</button>
             <div id="tasklist"></div>
@@ -28,26 +28,28 @@
                 <input type="checkbox" id="drop-remove" />
                 <label for="drop-remove">remove after drop</label>
             </p>
-        </div>
-        <b>Event</b>
-        <div id="eventRedactor">
-            <table>
 
-                <tbody>
-                <tr>
-                    <td>Title: </td>
-                    <td id="title" contenteditable="true">Титле</td>
-                </tr>
-                <tr>
-                    <td >Duration(hours): </td>
-                    <td id="duration" contenteditable="true">Дюратион</td>
-                </tr>
-                <tr>
-                    <td >Repeat every (days): </td>
-                    <td contenteditable="true">Репиатабле</td>
-                </tr>
-                </tbody>
-            </table>
+            <div id="event-editor">
+                <b>Event</b>
+                <table>
+
+                    <tbody>
+                    <tr>
+                        <td>Title: </td>
+                        <td id="title" contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>Duration(<span id="duration-dimension">hours</span>): </td>
+                        <td id="duration" contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td >Repeat every (days): </td>
+                        <td id="repetition" contenteditable="true"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button id="save">Save changes</button>
+            </div>
 
         </div>
 

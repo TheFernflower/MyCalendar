@@ -1,4 +1,4 @@
-
+    var currentEvent = null;
 
     function createCalendarEvent(title, start, end) {
         $.ajax({
@@ -115,20 +115,41 @@
         });
     }
 
-    function showCalendarEventRedactor(calEvent){
-        console.log(calEvent);
-        $("#title").html(calEvent.title);
+    function showCalendarEventProperties(calEvent){
 
-        /*$.ajax({
-            url: '/events',
-            method: 'GET'
-        }).done(function(data){
-         var divs = $('<div />',{
-         html: calEvent.title
-         });
-         $('#eventRedactor').html(divs);
-         });*/
+        $("#title").html(calEvent.title);
+        $("#repetition").html(calEvent.repetition);
+        var duration = calEvent.end.diff(calEvent.start, 'hours');
+        if(duration>0){
+             $("#duration-dimension").html("hours");
+             $("#duration").html(duration);
+
         }
+        else {
+            duration = calEvent.end.diff(calEvent.start, 'minutes');
+            $("#duration-dimension").html("min");
+            $("#duration").html(duration);
+            $("#duration").html();
+        }
+    }
+
+    function updateCalendarEvent(calEvent){
+        $.ajax({
+            url: '/events',
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify ({
+                'title':calEvent.title,
+                'start': calEvent.start,
+                'end': calEvent.end,
+                'id': calEvent.id,
+                'repeatable': calEvent.repeatable
+            })
+        }).done(function(data){
+            $('#calendar').fullCalendar( 'refetchEvents' );
+        });
+
+    }
 
     function dropTask(date, jsEvent, ui) {
         createCalendarEvent($(this).data().task.title, date.toDate(), date.add(1, 'hours').toDate());
@@ -151,17 +172,17 @@
             setCalendarEventCompleted(calEvent.id);
         }
         else {
-        console.log("privet");
-        showCalendarEventRedactor(calEvent);
+            showCalendarEventProperties(calEvent);
+            currentEvent = calEvent;
         }
 
     }
 
     function calendarSelectCallback ( start, end, jsEvent, view ) {
-            var title = prompt('Enter the title of the event', '')
-            if (title){
-                createCalendarEvent(title, start.toDate(), end.toDate());
-            }
+        var title = prompt('Enter the title of the event', '')
+        if (title){
+            createCalendarEvent(title, start.toDate(), end.toDate());
+        }
     }
 
     function calendarEventChangeCallback (event, jsEvent, ui, view){
@@ -191,8 +212,22 @@
         }
      }
 
+    function saveEventPropertiesCallback() {
+        if (currentEvent !== null){
+            currentEvent.repeatable = $('#repetition').html();
+            if($('#title').html().length > 0){
+                currentEvent.title = $('#title').html();
+            }
+            else alert('Title cannot be empty');
+
+            updateCalendarEvent(currentEvent);
+        }
+        
+    }
+
     function initCallbacks() {
         $('#button').on('click', createTaskButtonCallback);
+        $('#save').on('click', saveEventPropertiesCallback);
 
     }
 
