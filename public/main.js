@@ -222,7 +222,7 @@
 
             updateCalendarEvent(currentEvent);
         }
-        
+
     }
 
     function initCallbacks() {
