@@ -15,4 +15,11 @@ public interface EventRepository extends CrudRepository<Event, Long>{
     int setEventCompletedFlag(long id);
 
 
+    @Transactional
+    @Query("select e from event e where e.user_id = ?1")
+    Iterable<Event> findAll(long userId);
+
+    @Transactional
+    @Query("select e from event e where e.class <> 'fc-event-completed' ")
+    Iterable<Event> findAllNonCompleted();
 }

@@ -14,6 +14,7 @@ public class Event {
     private String title;
     private Date start;
     private Date end;
+    private Date originalEnd;
     private Boolean completed = false;
     @Column (name="class")
     private String className = "";
@@ -27,6 +28,7 @@ public class Event {
         title = title_;
         start = start_;
         end = end_;
+        originalEnd = end_;
     }
 
     public long getId() {
@@ -75,6 +77,10 @@ public class Event {
 
     public Integer getRepetition() {
         return repetition;
+    }
+
+    public Date getOriginalEnd() {
+        return originalEnd;
     }
 
     public void setRepetition(Integer repetition) {

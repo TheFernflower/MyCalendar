@@ -18,9 +18,9 @@ public class EventController {
             компонента.*/
     EventRepository eventRepository;
 
-    @RequestMapping(value = "/events", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Event> getEvents() {
-        return eventRepository.findAll();
+    @RequestMapping(value = "/events/userId", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Event> getEvents(@PathVariable("id") long id) {
+        return eventRepository.findAll(id);
     }
 
 

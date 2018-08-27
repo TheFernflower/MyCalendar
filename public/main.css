@@ -21,3 +21,11 @@
 .fc-event-completed {
     background: green;
 }
+
+.fc-event-delayed{
+    background: orange;
+}
+
+.fc-event-overdue{
+    background: red;
+}
