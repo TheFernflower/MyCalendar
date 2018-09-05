@@ -1,4 +1,4 @@
-package Calendar.models;
+package Calendar.core.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name="task")
 @Table(name="task")
 public class Task {
     @Id
@@ -15,6 +15,7 @@ public class Task {
     private long id;
 
     private String title;
+    private long userId;
 
     public Task(){
 
@@ -37,5 +38,13 @@ public class Task {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

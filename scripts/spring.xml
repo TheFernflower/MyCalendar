@@ -21,7 +21,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>Calendar.models.Event</value>
+                <value>Calendar.core.models.Event</value>
             </list>
         </property>
         <property name="hibernateProperties">

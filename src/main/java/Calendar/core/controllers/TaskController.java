@@ -1,7 +1,7 @@
-package Calendar.controllers;
+package Calendar.core.controllers;
 
-import Calendar.models.Task;
-import Calendar.repositories.TaskRepository;
+import Calendar.core.models.Task;
+import Calendar.core.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
-package Calendar.repositories;
+package Calendar.core.repositories;
 
-import Calendar.models.Event;
+import Calendar.core.models.Event;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,10 +16,10 @@ public interface EventRepository extends CrudRepository<Event, Long>{
 
 
     @Transactional
-    @Query("select e from event e where e.user_id = ?1")
-    Iterable<Event> findAll(long userId);
+    @Query("select e from event e where e.userId = ?1")
+    Iterable<Event> findAllByUserId(long userId);
 
     @Transactional
-    @Query("select e from event e where e.class <> 'fc-event-completed' ")
+    @Query("select e from event e where e.className <> 'fc-event-completed' ")
     Iterable<Event> findAllNonCompleted();
 }

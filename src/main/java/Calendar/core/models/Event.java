@@ -1,4 +1,4 @@
-package Calendar.models;
+package Calendar.core.models;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,11 +14,12 @@ public class Event {
     private String title;
     private Date start;
     private Date end;
-    private Date originalEnd;
+    private Date originalStart;
     private Boolean completed = false;
     @Column (name="class")
     private String className = "";
     private Integer repetition;
+    private long userId;
 
     public Event(){
 
@@ -28,7 +29,9 @@ public class Event {
         title = title_;
         start = start_;
         end = end_;
-        originalEnd = end_;
+        originalStart = end_;
+
+        // Don't forget to add current user ID here!
     }
 
     public long getId() {
@@ -79,12 +82,20 @@ public class Event {
         return repetition;
     }
 
-    public Date getOriginalEnd() {
-        return originalEnd;
+    public Date getOriginalStart() {
+        return originalStart;
     }
 
     public void setRepetition(Integer repetition) {
         this.repetition = repetition;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     @Override
