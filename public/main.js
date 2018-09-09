@@ -250,6 +250,7 @@
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         eventLimit: true,
+        allDaySlot: false,
         droppable: true, // this allows things to be dropped onto the calendar
         drop: dropTask,
         eventDrop: calendarEventChangeCallback,
