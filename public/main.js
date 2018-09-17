@@ -175,7 +175,6 @@
             showCalendarEventProperties(calEvent);
             currentEvent = calEvent;
         }
-
     }
 
     function calendarSelectCallback ( start, end, jsEvent, view ) {
@@ -225,9 +224,16 @@
 
     }
 
+    function deleteCalendarEventCallback(){
+
+            deleteCalendarEvent(currentEvent.id);
+
+    }
+
     function initCallbacks() {
         $('#button').on('click', createTaskButtonCallback);
         $('#save').on('click', saveEventPropertiesCallback);
+        $('#delete').on('click', deleteCalendarEventCallback);
 
     }
 

@@ -1,8 +1,8 @@
 package Calendar.security;
 
+import Calendar.core.models.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -16,9 +16,14 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     long getCurrentUserId() {
         return customUserDetailsService.getCurrentUserId();
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    public void createEvent(@RequestBody User user) {
+        customUserDetailsService.save(user);
     }
 
 }

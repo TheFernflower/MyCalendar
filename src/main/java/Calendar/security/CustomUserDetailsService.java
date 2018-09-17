@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -26,9 +27,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 
+    @Transactional
     public long getCurrentUserId() {
         CustomUserPrincipal customUserPrincipal = (CustomUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return customUserPrincipal.getUserId();
+    }
+
+    @Transactional
+    public void save(User user){
+        userRepository.save(user);
     }
 
 }

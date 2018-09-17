@@ -18,6 +18,10 @@
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
 }
 
+.control-desk {
+  max-width: 200px;
+}
+
 .fc-event-completed {
     background: green;
 }
