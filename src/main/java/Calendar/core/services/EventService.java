@@ -53,6 +53,7 @@ public class EventService {
         }
         else throw new DataMismatchException("Event with id = " + id + " does not exist");
     }
+
    @Transactional
     public void setEventCompletedFlag(long id){
         eventRepository.setEventCompletedFlag(id);
