@@ -39,27 +39,7 @@ public class EventController {
         return eventService.findById(id);
     }
 
-    /*
 
-    === javascript ===
-    $.ajax({ url: '/events_ololo',
-                method: 'POST',
-                data: {
-                  param1: 'value1',
-                  param2: 'value2'
-                }
-          }).done(function() {
-                 });
-
-
-    === java ===
-
-    @RequestMapping(value = "/events_ololo", method = RequestMethod.POST)
-    public void eventOlolo(@RequestParam(value="param1") String myParam, @RequestParam(value="param2") String myParam2) {
-
-    }
-
-    */
 
     @RequestMapping(value = "/events", method = RequestMethod.PUT)
     public void saveEvent (@RequestBody Event event){

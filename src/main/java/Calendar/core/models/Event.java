@@ -1,6 +1,6 @@
 package Calendar.core.models;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity(name="event")
 @Table(name="event")
@@ -12,9 +12,9 @@ public class Event {
     private long id;
 
     private String title;
-    private Date start;
-    private Date end;
-    private Date originalStart;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private LocalDateTime originalStart;
     private Boolean completed = false;
     @Column (name="class")
     private String className = "";
@@ -25,13 +25,12 @@ public class Event {
 
     }
 
-    public Event(String title_, Date start_, Date end_){
+    public Event(String title_, LocalDateTime start_, LocalDateTime end_){
         title = title_;
         start = start_;
         end = end_;
         originalStart = end_;
-
-        // Don't forget to add current user ID here!
+        //the current user ID is added in CustomUserDetailsService when an event is created
     }
 
     public long getId() {
@@ -48,17 +47,17 @@ public class Event {
         this.title = title;
     }
 
-    public Date getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
-    public void setEnd(Date end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
-    public Date getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
-    public void setStart(Date start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
@@ -82,7 +81,7 @@ public class Event {
         return repetition;
     }
 
-    public Date getOriginalStart() {
+    public LocalDateTime getOriginalStart() {
         return originalStart;
     }
 

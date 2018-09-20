@@ -5,8 +5,9 @@ import Calendar.core.models.Event;
 import Calendar.core.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -28,7 +29,9 @@ public class EventEscalatorService {
         if (eventRepository == null) System.out.println("eventRepository is null!");
         List<Event> nonCompleted = (List<Event>) eventRepository.findAllNonCompleted();
         for (Event event : nonCompleted) {
-            if (isBefore(event.getStart())) {
+            ;
+            System.out.println("Event " + event.getTitle() + " on time " + event.getStart());
+            if (isAfter(event.getStart())) {
                 System.out.println(event.getTitle());
                 event.setStart(timeUtility(event.getStart()));
                 if (event.getEnd() == null) {
@@ -46,26 +49,20 @@ public class EventEscalatorService {
         }
     }
 
-    public Date timeUtility(Date date){
-        Calendar calendar =  Calendar.getInstance();
-        calendar.setTime(date);
-        Calendar now = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, now.get(Calendar.YEAR));
-        calendar.set(Calendar.MONTH, now.get(Calendar.MONTH));
-        calendar.set(Calendar.DAY_OF_MONTH, now.get(Calendar.DAY_OF_MONTH));
-        return calendar.getTime();
+    //set the current date and keep the time of event
+    public LocalDateTime timeUtility(LocalDateTime dateTime){
+       return LocalDateTime.of(LocalDate.now(), dateTime.toLocalTime());
     }
 
-    public boolean isBefore(Date date){
-        Calendar calendar =  Calendar.getInstance();
-        calendar.setTime(date);
-        Calendar now = Calendar.getInstance();
-        return calendar.before(now);
+    public boolean isAfter(LocalDateTime dateTime){
+        return LocalDate.now().isAfter(dateTime.toLocalDate());
     }
 
-    public long countDifferenceInDays(Date date){
-        Date now = new Date();
-        return now.getTime() - date.getTime();
+    public long countDifferenceInDays(LocalDateTime dateTime){
+        Period period = Period.between(LocalDate.now(), dateTime.toLocalDate());
+        return period.getDays();
     }
+
+
 
 }
