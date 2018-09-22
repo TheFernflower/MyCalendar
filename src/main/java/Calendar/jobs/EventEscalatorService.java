@@ -13,10 +13,6 @@ import java.util.List;
 @Service
 public class EventEscalatorService {
 
-/*    @Autowired
-    EventRepository eventRepository;*/
-
-
 
     private EventRepository eventRepository = null;
 
@@ -29,7 +25,7 @@ public class EventEscalatorService {
         if (eventRepository == null) System.out.println("eventRepository is null!");
         List<Event> nonCompleted = (List<Event>) eventRepository.findAllNonCompleted();
         for (Event event : nonCompleted) {
-            ;
+
             System.out.println("Event " + event.getTitle() + " on time " + event.getStart());
             if (isAfter(event.getStart())) {
                 System.out.println(event.getTitle());
@@ -38,10 +34,11 @@ public class EventEscalatorService {
                     System.out.println("Event " + event.getTitle() + " end is null!!!111");
                 }
                 event.setEnd(timeUtility(event.getEnd()));
-                if(countDifferenceInDays(event.getStart()) == 1){
+                System.out.println("Event " + event.getStart() + " difference in days " + countDifferenceInDays(event.getOriginalStart()));
+                if(countDifferenceInDays(event.getOriginalStart()) == 1){
                     event.setClassName("fc-event-delayed");
                 }
-                else if(countDifferenceInDays(event.getStart())>1){
+                else if(countDifferenceInDays(event.getOriginalStart())>1){
                     event.setClassName("fc-event-overdue");
                 }
             }
@@ -59,7 +56,7 @@ public class EventEscalatorService {
     }
 
     public long countDifferenceInDays(LocalDateTime dateTime){
-        Period period = Period.between(LocalDate.now(), dateTime.toLocalDate());
+        Period period = Period.between(dateTime.toLocalDate(), LocalDate.now());
         return period.getDays();
     }
 

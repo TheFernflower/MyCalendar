@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 public interface EventRepository extends CrudRepository<Event, Long>{
 
@@ -22,4 +24,13 @@ public interface EventRepository extends CrudRepository<Event, Long>{
     @Transactional
     @Query("select e from event e where e.className <> 'fc-event-completed' ")
     Iterable<Event> findAllNonCompleted();
+
+    @Transactional
+    @Query("select e from event e where e.id = ?1 and e.userId = ?2")
+    Optional<Event> findByEventId(long eventId, long userId);
+
+    @Modifying
+    @Transactional
+    @Query("delete from event e where e.id = ?1 and e.userId = ?2")
+    void deleteByEventId(long eventId, long userId);
 }

@@ -30,13 +30,13 @@ public class EventController {
     @RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)
     public void deleteEvent(@PathVariable("id") long id)
     {
-        eventService.deleteById(id);
+        eventService.deleteByEventId(id);
     }
 
     @RequestMapping(value = "/events/{id}", method = RequestMethod.GET)
     public @ResponseBody
     Event getEvent(@PathVariable("id") long id) {
-        return eventService.findById(id);
+        return eventService.findByEventId(id);
     }
 
 

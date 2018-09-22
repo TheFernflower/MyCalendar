@@ -41,15 +41,17 @@ public class EventService {
     }
 
     @Transactional
-    public Event findById(long id) {
-        return eventRepository.findById(id)
+    public Event findByEventId(long id) {
+        long userId = userService.getCurrentUserId();
+        return eventRepository.findByEventId(id, userId)
                 .orElseThrow(() -> new EntityNotFoundException("Event with id = " + id + " not found"));
     }
 
     @Transactional
-    public void deleteById(long id){
+    public void deleteByEventId(long id){
+        long userId = userService.getCurrentUserId();
         if(eventRepository.findById(id).isPresent()) {
-            eventRepository.deleteById(id);
+            eventRepository.deleteByEventId(id, userId);
         }
         else throw new DataMismatchException("Event with id = " + id + " does not exist");
     }

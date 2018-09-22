@@ -119,18 +119,21 @@
 
         $("#title").html(calEvent.title);
         $("#repetition").html(calEvent.repetition);
-        var duration = calEvent.end.diff(calEvent.start, 'hours');
+
+        console.log(calEvent);
+/*      This fails on automatically moved events created on the month view */
+/*        var duration = calEvent.end.diff(calEvent.start, 'hours');
+
         if(duration>0){
              $("#duration-dimension").html("hours");
              $("#duration").html(duration);
-
         }
         else {
             duration = calEvent.end.diff(calEvent.start, 'minutes');
             $("#duration-dimension").html("min");
             $("#duration").html(duration);
             $("#duration").html();
-        }
+        }*/
     }
 
     function updateCalendarEvent(calEvent){
@@ -179,7 +182,13 @@
 
     function calendarSelectCallback ( start, end, jsEvent, view ) {
         var title = prompt('Enter the title of the event', '')
-        if (title){
+        if (title) {
+            // FullCalender creates 24-hour long events in month view.
+            // That's not exactly what we need here.
+            if (view.type == "month") {
+              end = start.clone();
+              end.add('15', 'minutes');
+            }
             createCalendarEvent(title, start.toDate(), end.toDate());
         }
     }

@@ -29,7 +29,7 @@ public class Event {
         title = title_;
         start = start_;
         end = end_;
-        originalStart = end_;
+        originalStart = start_;
         //the current user ID is added in CustomUserDetailsService when an event is created
     }
 
@@ -59,6 +59,9 @@ public class Event {
     }
     public void setStart(LocalDateTime start) {
         this.start = start;
+        if (this.originalStart == null) {
+            this.originalStart = start;
+        }
     }
 
     public Boolean getCompleted()
@@ -83,6 +86,10 @@ public class Event {
 
     public LocalDateTime getOriginalStart() {
         return originalStart;
+    }
+
+    public void setOriginalStart(LocalDateTime originalStart) {
+        this.originalStart = originalStart;
     }
 
     public void setRepetition(Integer repetition) {
