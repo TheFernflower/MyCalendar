@@ -39,8 +39,6 @@ public class EventController {
         return eventService.findByEventId(id);
     }
 
-
-
     @RequestMapping(value = "/events", method = RequestMethod.PUT)
     public void saveEvent (@RequestBody Event event){
         eventService.save(event);

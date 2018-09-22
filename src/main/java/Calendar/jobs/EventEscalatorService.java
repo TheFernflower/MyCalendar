@@ -25,29 +25,22 @@ public class EventEscalatorService {
         if (eventRepository == null) System.out.println("eventRepository is null!");
         List<Event> nonCompleted = (List<Event>) eventRepository.findAllNonCompleted();
         for (Event event : nonCompleted) {
-
-            System.out.println("Event " + event.getTitle() + " on time " + event.getStart());
             if (isAfter(event.getStart())) {
-                System.out.println(event.getTitle());
-                event.setStart(timeUtility(event.getStart()));
-                if (event.getEnd() == null) {
-                    System.out.println("Event " + event.getTitle() + " end is null!!!111");
-                }
-                event.setEnd(timeUtility(event.getEnd()));
-                System.out.println("Event " + event.getStart() + " difference in days " + countDifferenceInDays(event.getOriginalStart()));
+                event.setStart(moveTodayKeepingTime(event.getStart()));
+                event.setEnd(moveTodayKeepingTime(event.getEnd()));
                 if(countDifferenceInDays(event.getOriginalStart()) == 1){
                     event.setClassName("fc-event-delayed");
                 }
                 else if(countDifferenceInDays(event.getOriginalStart())>1){
                     event.setClassName("fc-event-overdue");
                 }
+                eventRepository.save(event);
             }
-            eventRepository.save(event);
-        }
+         }
     }
 
     //set the current date and keep the time of event
-    public LocalDateTime timeUtility(LocalDateTime dateTime){
+    public LocalDateTime moveTodayKeepingTime(LocalDateTime dateTime){
        return LocalDateTime.of(LocalDate.now(), dateTime.toLocalTime());
     }
 
@@ -59,7 +52,5 @@ public class EventEscalatorService {
         Period period = Period.between(dateTime.toLocalDate(), LocalDate.now());
         return period.getDays();
     }
-
-
 
 }
