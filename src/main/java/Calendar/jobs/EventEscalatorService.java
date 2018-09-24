@@ -21,7 +21,7 @@ public class EventEscalatorService {
     }
 
     public void shiftEvent(){
-        System.out.println("inside");
+
         if (eventRepository == null) System.out.println("eventRepository is null!");
         List<Event> nonCompleted = (List<Event>) eventRepository.findAllNonCompleted();
         for (Event event : nonCompleted) {

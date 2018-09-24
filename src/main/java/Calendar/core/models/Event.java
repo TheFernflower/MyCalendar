@@ -1,4 +1,6 @@
 package Calendar.core.models;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -18,7 +20,8 @@ public class Event {
     private Boolean completed = false;
     @Column (name="class")
     private String className = "";
-    private Integer repetition;
+    @Nullable
+    private Long recurrence;
     private long userId;
 
     public Event(){
@@ -80,8 +83,12 @@ public class Event {
         return className;
     }
 
-    public Integer getRepetition() {
-        return repetition;
+    public Long getRecurrence() {
+        return recurrence;
+    }
+
+    public void setRecurrence(Long recurrence) {
+        this.recurrence = recurrence;
     }
 
     public LocalDateTime getOriginalStart() {
@@ -92,9 +99,7 @@ public class Event {
         this.originalStart = originalStart;
     }
 
-    public void setRepetition(Integer repetition) {
-        this.repetition = repetition;
-    }
+
 
     public long getUserId() {
         return userId;
@@ -102,6 +107,13 @@ public class Event {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public boolean isRecurrent(){
+        if (recurrence == null){
+            return false;
+        }
+        return true;
     }
 
     @Override

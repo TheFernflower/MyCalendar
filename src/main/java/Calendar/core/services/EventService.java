@@ -56,11 +56,23 @@ public class EventService {
         else throw new DataMismatchException("Event with id = " + id + " does not exist");
     }
 
-   @Transactional
-    public void setEventCompletedFlag(long id){
+    @Transactional
+    public void processEventCompleted(long id) {
+        Event completedEvent = findByEventId(id);
+        if (completedEvent.isRecurrent()) {
+            save(copyEventWithShiftOnRecurrence(completedEvent));
+        }
         eventRepository.setEventCompletedFlag(id);
     }
 
 
+    private Event copyEventWithShiftOnRecurrence(Event copiedEvent) {
+        Event event = new Event();
+        event.setTitle(copiedEvent.getTitle());
+        event.setStart(copiedEvent.getStart().plusDays(copiedEvent.getRecurrence()));
+        event.setEnd(copiedEvent.getEnd().plusDays(copiedEvent.getRecurrence()));
+        event.setRecurrence(copiedEvent.getRecurrence());
+        return event;
+    }
 
 }

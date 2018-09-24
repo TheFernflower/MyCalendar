@@ -46,7 +46,7 @@ public class EventController {
 
     @RequestMapping(value = "/events/{id}/completed", method = RequestMethod.PUT)
     public void setEventCompleted(@PathVariable(value="id") long id) {
-        eventService.setEventCompletedFlag(id);
+        eventService.processEventCompleted(id);
     }
 
 }

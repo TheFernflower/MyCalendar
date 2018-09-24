@@ -118,7 +118,7 @@
     function showCalendarEventProperties(calEvent){
 
         $("#title").html(calEvent.title);
-        $("#repetition").html(calEvent.repetition);
+        $("#recurrence").html(calEvent.recurrence);
 
         console.log(calEvent);
 /*      This fails on automatically moved events created on the month view */
@@ -146,7 +146,7 @@
                 'start': calEvent.start,
                 'end': calEvent.end,
                 'id': calEvent.id,
-                'repeatable': calEvent.repeatable
+                'recurrence': calEvent.recurrence
             })
         }).done(function(data){
             $('#calendar').fullCalendar( 'refetchEvents' );
@@ -222,11 +222,13 @@
 
     function saveEventPropertiesCallback() {
         if (currentEvent !== null){
-            currentEvent.repeatable = $('#repetition').html();
+            currentEvent.recurrence = $('#recurrence').html();
             if($('#title').html().length > 0){
                 currentEvent.title = $('#title').html();
             }
             else alert('Title cannot be empty');
+
+            console.log(currentEvent);
 
             updateCalendarEvent(currentEvent);
         }
