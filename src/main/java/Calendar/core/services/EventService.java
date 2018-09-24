@@ -50,7 +50,7 @@ public class EventService {
     @Transactional
     public void deleteByEventId(long id){
         long userId = userService.getCurrentUserId();
-        if(eventRepository.findById(id).isPresent()) {
+        if(findByEventId(id) != null) {
             eventRepository.deleteByEventId(id, userId);
         }
         else throw new DataMismatchException("Event with id = " + id + " does not exist");
@@ -60,18 +60,18 @@ public class EventService {
     public void processEventCompleted(long id) {
         Event completedEvent = findByEventId(id);
         if (completedEvent.isRecurrent()) {
-            save(copyEventWithShiftOnRecurrence(completedEvent));
+            save(buildNextRecurringEvent(completedEvent));
         }
         eventRepository.setEventCompletedFlag(id);
     }
 
 
-    private Event copyEventWithShiftOnRecurrence(Event copiedEvent) {
+    private Event buildNextRecurringEvent(Event sourceEvent) {
         Event event = new Event();
-        event.setTitle(copiedEvent.getTitle());
-        event.setStart(copiedEvent.getStart().plusDays(copiedEvent.getRecurrence()));
-        event.setEnd(copiedEvent.getEnd().plusDays(copiedEvent.getRecurrence()));
-        event.setRecurrence(copiedEvent.getRecurrence());
+        event.setTitle(sourceEvent.getTitle());
+        event.setStart(sourceEvent.getStart().plusDays(sourceEvent.getRecurrence()));
+        event.setEnd(sourceEvent.getEnd().plusDays(sourceEvent.getRecurrence()));
+        event.setRecurrence(sourceEvent.getRecurrence());
         return event;
     }
 
