@@ -21,7 +21,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>Calendar.core.models.Event</value>
+                <value>com.github.thefernflower.calendar.core.models.Event</value>
             </list>
         </property>
         <property name="hibernateProperties">

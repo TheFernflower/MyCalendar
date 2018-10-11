@@ -1,5 +1,12 @@
     var currentEvent = null;
 
+    function setCurrentEvent(calEvent) {
+        currentEvent = calEvent;
+        if (Array.isArray(currentEvent.className)) {
+            currentEvent.className = currentEvent.className[0];
+        }
+    }
+
     function createCalendarEvent(title, start, end) {
         $.ajax({
           url: '/events',
@@ -24,8 +31,9 @@
                 'title':calEvent.title,
                 'start': calEvent.start,
                 'end': calEvent.end,
-                'id': calEvent.id
-            })
+                'id': calEvent.id,
+                'recurrence': calEvent.recurrence
+             })
         }).done(function(data){
             $('#calendar').fullCalendar( 'refetchEvents' );
         });
@@ -146,7 +154,9 @@
                 'start': calEvent.start,
                 'end': calEvent.end,
                 'id': calEvent.id,
-                'recurrence': calEvent.recurrence
+                'duration': calEvent.duration,
+                'recurrence': calEvent.recurrence,
+                'className': calEvent.className
             })
         }).done(function(data){
             $('#calendar').fullCalendar( 'refetchEvents' );
@@ -176,7 +186,7 @@
         }
         else {
             showCalendarEventProperties(calEvent);
-            currentEvent = calEvent;
+            setCurrentEvent(calEvent);
         }
     }
 
@@ -213,16 +223,19 @@
 
      }
 
-     function taskDeleteCallback(){
+/*     function taskDeleteCallback(){
         var confirmDelete = confirm('Do you really want to remove this task?');
         if(confirmDelete){
             deleteTask(taskClickCallback);
         }
-     }
+     }*/
 
     function saveEventPropertiesCallback() {
         if (currentEvent !== null){
-            currentEvent.recurrence = $('#recurrence').html();
+            if (!(currentEvent.recurrence = parseInt($('#recurrence').html()))) {
+              alert("Recurrence should be a number");
+              return;
+            }
             if($('#title').html().length > 0){
                 currentEvent.title = $('#title').html();
             }
