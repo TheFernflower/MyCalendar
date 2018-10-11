@@ -18,7 +18,7 @@ public class TaskController {
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     public @ResponseBody
     Iterable<Task> getTasks() {
-        return taskRepository.findAll();
+       return taskRepository.findAll();
     }
 
 
