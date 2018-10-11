@@ -23,15 +23,13 @@ public class EventService {
 
     @Transactional(readOnly = true)
     public Iterable<Event> findAll() {
-        Iterable<Event> result = eventRepository.findAll();
-        return result;
+        return eventRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Iterable<Event> findAllByUserId() {
         long userId = userService.getCurrentUserId();
-        Iterable<Event> result = eventRepository.findAllByUserId(userId);
-        return result;
+        return eventRepository.findAllByUserId(userId);
     }
 
     @Transactional

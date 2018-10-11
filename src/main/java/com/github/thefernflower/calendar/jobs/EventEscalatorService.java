@@ -39,15 +39,15 @@ public class EventEscalatorService {
     }
 
     //set the current date and keep the time of event
-    public LocalDateTime moveTodayKeepingTime(LocalDateTime dateTime){
+    private LocalDateTime moveTodayKeepingTime(LocalDateTime dateTime){
        return LocalDateTime.of(LocalDate.now(), dateTime.toLocalTime());
     }
 
-    public boolean isAfter(LocalDateTime dateTime){
+    private boolean isAfter(LocalDateTime dateTime){
         return LocalDate.now().isAfter(dateTime.toLocalDate());
     }
 
-    public long countDifferenceInDays(LocalDateTime dateTime){
+    private long countDifferenceInDays(LocalDateTime dateTime){
         Period period = Period.between(dateTime.toLocalDate(), LocalDate.now());
         return period.getDays();
     }

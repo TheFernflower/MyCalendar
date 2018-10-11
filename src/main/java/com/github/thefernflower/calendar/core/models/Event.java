@@ -110,10 +110,7 @@ public class Event {
     }
 
     public boolean isRecurrent(){
-        if (recurrence == null){
-            return false;
-        }
-        return true;
+        return recurrence != null;
     }
 
     @Override

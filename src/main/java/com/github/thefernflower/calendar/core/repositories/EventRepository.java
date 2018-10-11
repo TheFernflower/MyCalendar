@@ -14,7 +14,7 @@ public interface EventRepository extends CrudRepository<Event, Long>{
     @Modifying
     @Transactional
     @Query("update event e set e.completed = true, e.className = 'fc-event-completed' where e.id = ?1")
-    int setEventCompletedFlag(long id);
+    void setEventCompletedFlag(long id);
 
 
     @Transactional

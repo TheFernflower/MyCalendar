@@ -24,15 +24,13 @@ public class TaskService {
 
     @Transactional(readOnly = true)
     public Iterable<Task> findAll() {
-        Iterable<Task> result = taskRepository.findAll();
-        return result;
+        return taskRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Iterable<Task> findAllByUserId() {
         long userId = userService.getCurrentUserId();
-        Iterable<Task> result = taskRepository.findAllByUserId(userId);
-        return result;
+        return taskRepository.findAllByUserId(userId);
     }
 
     @Transactional

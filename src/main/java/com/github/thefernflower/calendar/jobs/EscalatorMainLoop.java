@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class EscalatorMainLoop{
 
     //final long TIME_UPDATE = 3600000;
-    final long TIME_UPDATE = 5000;
+    private final long TIME_UPDATE = 5000;
 
     @Autowired
     EventEscalatorService eventEscalatorService;
@@ -23,6 +23,6 @@ public class EscalatorMainLoop{
 
     }
 
-    }
+}
 
 
