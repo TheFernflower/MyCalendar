@@ -13,7 +13,7 @@ import java.time.Period;
 public class EventEscalatorService {
 
 
-    private EventRepository eventRepository = null;
+    private EventRepository eventRepository;
 
     public EventEscalatorService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;

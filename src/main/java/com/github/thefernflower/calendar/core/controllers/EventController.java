@@ -2,16 +2,12 @@ package com.github.thefernflower.calendar.core.controllers;
 
 
 import com.github.thefernflower.calendar.core.models.Event;
-import com.github.thefernflower.calendar.core.repositories.EventRepository;
 import com.github.thefernflower.calendar.core.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EventController {
-
-    @Autowired
-    EventRepository eventRepository;
 
     @Autowired
     EventService eventService;

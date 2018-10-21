@@ -12,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TaskService {
-    private final TaskRepository taskRepository;
 
-    public TaskService(TaskRepository taskRepository){
-        this.taskRepository = taskRepository;
-    }
+    @Autowired
+    TaskRepository taskRepository;
 
     @Autowired
     CustomUserDetailsService userService;
