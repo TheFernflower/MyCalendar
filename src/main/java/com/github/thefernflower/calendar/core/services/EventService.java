@@ -25,17 +25,13 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+
     @Transactional(readOnly = true)
     public Iterable<Event> findAllByUserId() {
         long userId = userService.getCurrentUserId();
         ZoneId zoneId = userService.getCurrentUserZoneId();
         Iterable<Event> tzAdjustedEvents = eventRepository.findAllByUserId(userId);
-        for (Event event : tzAdjustedEvents) {
-            event.setStart(event.getStart().withZoneSameInstant(zoneId));
-            event.setEnd(event.getEnd().withZoneSameInstant(zoneId));
-            event.setOriginalStart(event.getOriginalStart().withZoneSameInstant(zoneId));
-        }
-        return tzAdjustedEvents;
+        return updateTimeZones(tzAdjustedEvents, zoneId);
     }
 
     @Transactional
@@ -47,8 +43,11 @@ public class EventService {
     @Transactional
     public Event findByEventId(long id) {
         long userId = userService.getCurrentUserId();
-        return eventRepository.findByEventId(id, userId)
+        ZoneId zoneId = userService.getCurrentUserZoneId();
+        Event event = eventRepository.findByEventId(id, userId)
                 .orElseThrow(() -> new EntityNotFoundException("Event with id = " + id + " not found"));
+        updateTimeZone(event, zoneId);
+        return event;
     }
 
     @Transactional
@@ -79,4 +78,16 @@ public class EventService {
         return event;
     }
 
+    private Iterable<Event> updateTimeZones(Iterable<Event> events, ZoneId zoneId){
+        for (Event event : events) {
+            updateTimeZone(event, zoneId);
+        }
+        return events;
+    }
+
+    private void updateTimeZone(Event event, ZoneId zoneId){
+        event.setStart(event.getStart().withZoneSameInstant(zoneId));
+        event.setEnd(event.getEnd().withZoneSameInstant(zoneId));
+        event.setOriginalStart(event.getOriginalStart().withZoneSameInstant(zoneId));
+    }
 }
