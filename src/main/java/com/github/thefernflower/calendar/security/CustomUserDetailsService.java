@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -20,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userRepository.findByLogin(login);
         /*if (user == null) {
-            throw new EntityNotFoundException("User", login);
+            throw new EntityNotFoundException("User " + login + " not found");
         }*/
         //Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         return new CustomUserPrincipal(user);
@@ -31,6 +33,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     public long getCurrentUserId() {
         CustomUserPrincipal customUserPrincipal = (CustomUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return customUserPrincipal.getUserId();
+    }
+
+    @Transactional
+    public ZoneId getCurrentUserZoneId() {
+        CustomUserPrincipal customUserPrincipal = (CustomUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return customUserPrincipal.getZoneId();
     }
 
     @Transactional

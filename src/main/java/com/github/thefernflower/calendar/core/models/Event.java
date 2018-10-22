@@ -2,7 +2,7 @@ package com.github.thefernflower.calendar.core.models;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity(name="event")
 @Table(name="event")
@@ -14,11 +14,11 @@ public class Event {
     private long id;
 
     private String title;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private LocalDateTime originalStart;
+    private ZonedDateTime start;
+    private ZonedDateTime end;
+    private ZonedDateTime originalStart;
     private Boolean completed = false;
-    @Column (name="class")
+    @Column (name = "class")
     private String className = "";
     @Nullable
     private Long recurrence;
@@ -28,7 +28,7 @@ public class Event {
 
     }
 
-    public Event(String title, LocalDateTime start, LocalDateTime end){
+    public Event(String title, ZonedDateTime start, ZonedDateTime end){
         this.title = title;
         this.start = start;
         this.end = end;
@@ -50,17 +50,17 @@ public class Event {
         this.title = title;
     }
 
-    public LocalDateTime getEnd() {
+    public ZonedDateTime getEnd() {
         return end;
     }
-    public void setEnd(LocalDateTime end) {
+    public void setEnd(ZonedDateTime end) {
         this.end = end;
     }
 
-    public LocalDateTime getStart() {
+    public ZonedDateTime getStart() {
         return start;
     }
-    public void setStart(LocalDateTime start) {
+    public void setStart(ZonedDateTime start) {
         this.start = start;
         if (this.originalStart == null) {
             this.originalStart = start;
@@ -91,11 +91,11 @@ public class Event {
         this.recurrence = recurrence;
     }
 
-    public LocalDateTime getOriginalStart() {
+    public ZonedDateTime getOriginalStart() {
         return originalStart;
     }
 
-    public void setOriginalStart(LocalDateTime originalStart) {
+    public void setOriginalStart(ZonedDateTime originalStart) {
         this.originalStart = originalStart;
     }
 

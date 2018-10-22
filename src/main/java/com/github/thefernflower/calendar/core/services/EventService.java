@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+
 @Service
 public class EventService {
 
@@ -26,7 +28,14 @@ public class EventService {
     @Transactional(readOnly = true)
     public Iterable<Event> findAllByUserId() {
         long userId = userService.getCurrentUserId();
-        return eventRepository.findAllByUserId(userId);
+        ZoneId zoneId = userService.getCurrentUserZoneId();
+        Iterable<Event> tzAdjustedEvents = eventRepository.findAllByUserId(userId);
+        for (Event event : tzAdjustedEvents) {
+            event.setStart(event.getStart().withZoneSameInstant(zoneId));
+            event.setEnd(event.getEnd().withZoneSameInstant(zoneId));
+            event.setOriginalStart(event.getOriginalStart().withZoneSameInstant(zoneId));
+        }
+        return tzAdjustedEvents;
     }
 
     @Transactional

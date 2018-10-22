@@ -3,6 +3,7 @@ package com.github.thefernflower.calendar.security;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.ZoneId;
 
 @Entity(name="user")
 @Table(name="user")
@@ -19,6 +20,9 @@ public class User {
 
     @NotNull
     private String password;
+
+    @Column(name = "zone_id")
+    private String zoneId;
 
     public User(){
     }
@@ -46,6 +50,18 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public ZoneId getZoneIdObject(){
+        return ZoneId.of(zoneId);
     }
 
     @Override

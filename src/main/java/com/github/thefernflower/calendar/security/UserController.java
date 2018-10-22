@@ -15,8 +15,10 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/users")
+
+    @GetMapping("/users/current")
     long getCurrentUserId() {
+        System.out.println(userRepository.findById(customUserDetailsService.getCurrentUserId()).get().getZoneIdObject());
         return customUserDetailsService.getCurrentUserId();
     }
 
