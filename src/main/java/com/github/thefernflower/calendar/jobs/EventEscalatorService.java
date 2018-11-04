@@ -48,11 +48,6 @@ public class EventEscalatorService {
         return ZonedDateTime.now().isAfter(dateTime);
     }
 
-    /*private long countDifferenceInDays(ZonedDateTime dateTime){
-        Period period = Period.between(dateTime.toLocalDate(), LocalDate.now());
-        return period.getDays();
-    }*/
-
     private long countDifferenceInDays(ZonedDateTime dateTime){
         return dateTime.until(ZonedDateTime.now(), ChronoUnit.DAYS);
     }

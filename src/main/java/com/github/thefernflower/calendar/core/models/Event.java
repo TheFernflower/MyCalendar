@@ -115,6 +115,6 @@ public class Event {
 
     @Override
     public String toString(){
-        return "id="+id+", title="+title+", start="+start + ", end=" + end;
+        return "id="+id+", title="+title+", start="+start + ", end=" + end + ", class=" + className;
     }
 }
