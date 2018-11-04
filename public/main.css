@@ -33,3 +33,38 @@
 .fc-event-overdue{
     background: red;
 }
+
+#signup-container {
+    font-family: helvetica, arial, sans-serif;
+    border: none;
+    border-radius: 5px;
+    width:300px;
+    position: absolute;
+    transform: translate(-50%, 0);
+    left: 50%;
+    top: 0;
+    padding: 30px;
+
+}
+
+#signup-container input {
+    border: none;
+    background: #efefef;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 200%;
+    margin-bottom: 30px;
+    min-height: 40px;
+}
+
+#signup-container button {
+    border: none;
+    border-radius: 5px;
+    font-size: 100%;
+    background: #40564a;
+    padding: 10px;
+    text-decoration: underline;
+    min-width: 125px;
+    color: white;
+    min-height: 40px;
+}
