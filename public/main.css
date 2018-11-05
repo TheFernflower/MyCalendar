@@ -68,3 +68,7 @@
     color: white;
     min-height: 40px;
 }
+#signup-container #account-exists {
+    display: none;
+    color: red;
+}

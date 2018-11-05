@@ -57,6 +57,26 @@
              });
          }
 
+    function updateCalendarEvent(calEvent){
+            $.ajax({
+                url: '/events',
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify ({
+                    'title':calEvent.title,
+                    'start': calEvent.start,
+                    'end': calEvent.end,
+                    'id': calEvent.id,
+                    'duration': calEvent.duration,
+                    'recurrence': calEvent.recurrence,
+                    'className': calEvent.className
+                })
+            }).done(function(data){
+                $('#calendar').fullCalendar( 'refetchEvents' );
+            });
+
+        }
+
     function createTask(title){
 
         $.ajax({
@@ -75,6 +95,7 @@
             method: 'DELETE'
         }).done(updateTaskList);
     }
+
 
 
 
@@ -101,7 +122,6 @@
 
     function updateTaskList() {
         $.ajax({
-
             url: '/tasks',
             method: 'GET',
         }).done(function (data) {
@@ -144,25 +164,7 @@
         }*/
     }
 
-    function updateCalendarEvent(calEvent){
-        $.ajax({
-            url: '/events',
-            method: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify ({
-                'title':calEvent.title,
-                'start': calEvent.start,
-                'end': calEvent.end,
-                'id': calEvent.id,
-                'duration': calEvent.duration,
-                'recurrence': calEvent.recurrence,
-                'className': calEvent.className
-            })
-        }).done(function(data){
-            $('#calendar').fullCalendar( 'refetchEvents' );
-        });
 
-    }
 
     function dropTask(date, jsEvent, ui) {
         createCalendarEvent($(this).data().task.title, date.toDate(), date.add(1, 'hours').toDate());
@@ -172,6 +174,10 @@
             $(this).remove();
         }
     }
+
+
+
+
 
     function calendarEventClickCallback(calEvent, jsEvent, view) {
         if(jsEvent.shiftKey){
@@ -223,13 +229,6 @@
 
      }
 
-/*     function taskDeleteCallback(){
-        var confirmDelete = confirm('Do you really want to remove this task?');
-        if(confirmDelete){
-            deleteTask(taskClickCallback);
-        }
-     }*/
-
     function saveEventPropertiesCallback() {
         if (currentEvent !== null){
             if (!(currentEvent.recurrence = parseInt($('#recurrence').html()))) {
@@ -240,24 +239,21 @@
                 currentEvent.title = $('#title').html();
             }
             else alert('Title cannot be empty');
-
-            console.log(currentEvent);
-
             updateCalendarEvent(currentEvent);
         }
 
     }
 
+
     function deleteCalendarEventCallback(){
-
             deleteCalendarEvent(currentEvent.id);
-
     }
 
     function initCallbacks() {
         $('#button').on('click', createTaskButtonCallback);
         $('#save').on('click', saveEventPropertiesCallback);
         $('#delete').on('click', deleteCalendarEventCallback);
+
 
     }
 

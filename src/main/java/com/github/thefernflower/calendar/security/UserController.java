@@ -23,8 +23,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public void createEvent(@RequestBody User user) {
+    public void createUser(@RequestBody User user) {
         customUserDetailsService.save(user);
     }
 
+    @GetMapping("/users/{login}")
+     public boolean doesLoginExist(@PathVariable("login") String login){
+        return customUserDetailsService.doesLoginExist(login);
+    }
+
+    /*@GetMapping("/users/{password}")
+    public void changePassword(@PathVariable("password") String password){
+         customUserDetailsService.changePassword(password);
+    }*/
 }

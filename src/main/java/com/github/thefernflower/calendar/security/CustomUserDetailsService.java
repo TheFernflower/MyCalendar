@@ -46,4 +46,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public boolean doesLoginExist(String login){
+        return userRepository.findByLogin(login) != null;
+    }
+
+    @Transactional
+    public void changePassword(String password){
+
+    }
+
 }
