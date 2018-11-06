@@ -72,3 +72,8 @@
     display: none;
     color: red;
 }
+
+#signup-container #passwords-notEqual {
+    display: none;
+    color: red;
+}
