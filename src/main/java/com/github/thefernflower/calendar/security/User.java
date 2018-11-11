@@ -25,11 +25,13 @@ public class User {
     private String zoneId;
 
     public User(){
+        this.zoneId = "Europe/Oslo";
     }
 
     public User(String login, String password){
         this.login = login;
         this.password = password;
+        this.zoneId = "Europe/Oslo";
     }
 
     public long getId() {
@@ -49,6 +51,8 @@ public class User {
     }
 
     public void setPassword(String password) {
+     //   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+      //  this.password = passwordEncoder.encode(password);
         this.password = password;
     }
 

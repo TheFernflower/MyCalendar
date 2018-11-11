@@ -21,37 +21,36 @@
 
     <div id="main-container">
         <div div class="control-desk" id="control-panel">
-            <b>Task list</b>
-            <button id="button">+</button>
-            <div id="tasklist"></div>
-            <p>
+            <div class="tasklist-container">
+                <div class="panel-header">
+                    <div class="panel-caption">Task list</div><div class="panel-button-container"><button id="button">+</button></div>
+                </div>
+                <div id="tasklist"></div>
                 <input type="checkbox" id="drop-remove" />
                 <label for="drop-remove">remove after drop</label>
-            </p>
+            </div>
 
-            <div id="event-editor">
-                <b>Event</b>
-                <table>
-
-                    <tbody>
-                    <tr>
-                        <td>Title: </td>
-                        <td id="title" contenteditable="true"></td>
-                    </tr>
-                    <tr>
-                        <td>Duration(<span id="duration-dimension">hours</span>): </td>
-                        <td id="duration" contenteditable="true">z</td>
-                    </tr>
-                    <tr>
-                        <td >Repeat every (days): </td>
-                        <td id="recurrence" contenteditable="true"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button id="save">Save changes</button>
-                <button id="delete">Delete</button>
+            <div class="event-editor-container">
+                <div id="event-editor">
+                    <div class="panel-header">
+                        <div class="panel-caption">Event</div>
+                    </div>
+                    <div class="event-info-caption">Title</div>
+                    <div class="event-info-edit" id="title" contenteditable="true"></div>
+                    <div class="event-info-caption">Duration(<span id="duration-dimension">hours</span>)</div>
+                    <div class="event-info-edit" id="duration" contenteditable="true">z</div>
+                    <div class="event-info-caption">Repeat every (days)</div>
+                    <div class="event-info-edit" id="recurrence" contenteditable="true"></div>
+                    <div class="event-editor-button-block">
+                        <button id="save">Save changes</button>
+                        <button id="delete">Delete</button>
+                    </div>
+                </div>
             </div>
             <div div class="event-actions-desc" id="description">
+                <div class="panel-header">
+                    <div class="panel-caption">A little how-to</div>
+                </div>
                 <p>To create event left click on the calendar</p>
                 <p>To delete event shift + left click on event or chose event by left click and press the button Delete</p>
                 <p>To set event completed alt+left click on event</p>

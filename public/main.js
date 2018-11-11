@@ -22,23 +22,6 @@
         });
     }
 
-    function saveCalendarEvent(calEvent){
-        $.ajax({
-            url: '/events',
-            method: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify ({
-                'title':calEvent.title,
-                'start': calEvent.start,
-                'end': calEvent.end,
-                'id': calEvent.id,
-                'recurrence': calEvent.recurrence
-             })
-        }).done(function(data){
-            $('#calendar').fullCalendar( 'refetchEvents' );
-        });
-    }
-
     function deleteCalendarEvent(id){
         $.ajax({
             url: '/events/' + id,
@@ -95,8 +78,6 @@
             method: 'DELETE'
         }).done(updateTaskList);
     }
-
-
 
 
     function setTasksDraggable() {
@@ -210,7 +191,7 @@
     }
 
     function calendarEventChangeCallback (event, jsEvent, ui, view){
-        saveCalendarEvent(event);
+        updateCalendarEvent(event);
     }
 
     function createTaskButtonCallback() {
